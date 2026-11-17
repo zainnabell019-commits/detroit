@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>جمعية الرياض التعاونية | المتجر الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #f4f6f9;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --navy: #0a192f;
+            --navy-light: #112240;
+            --gold: #d4af37;
+            --gold-hover: #b59226;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.08);
+            --danger: #ef4444;
+            --success: #10b981;
+            --font-scale: 1;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #060d18;
+            --bg-secondary: #0a192f;
+            --bg-card: #112240;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e3a5f;
+            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-size: calc(15px * var(--font-scale));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold), #f3e5ab);
+            color: var(--navy);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            display: block;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+        }
+
+        .icon-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.7rem;
+            font-weight: 800;
+            min-width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+
+        /* Hero 3D Header */
+        .hero-3d {
+            position: relative;
+            background: radial-gradient(circle at top right, #112240, #060d18);
+            color: #fff;
+            padding: 55px 5% 65px;
+            overflow: hidden;
+            border-bottom: 2px solid var(--gold);
+            text-align: center;
+        }
+
+        #canvas3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(to left, #ffffff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-info-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            pointer-events: auto;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+
+        .pill i { color: var(--gold); }
+
+        /* Main Container & Filter Bar */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 25px 5%;
+        }
+
+        .filter-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            margin-top: -35px;
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 14px;
+            color: var(--gold);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 11px 38px 11px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-main);
+            font-size: 0.92rem;
+            outline: none;
+        }
+
+        select.form-control { padding-right: 14px; cursor: pointer; }
+        .form-control:focus { border-color: var(--gold); }
+
+        @media (max-width: 850px) {
+            .filter-panel { grid-template-columns: 1fr; margin-top: -20px; }
+            .hero-content h2 { font-size: 1.65rem; }
+            .brand-text span { display: none; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="brand">
+            <div class="brand-logo"><i class="fa-solid fa-store"></i></div>
+            <div class="brand-text">
+                <h1>جمعية الرياض التعاونية</h1>
+                <span>بغداد - جسر ديالى | سوق الرياض</span>
+            </div>
+        </a>
+        <div class="nav-actions">
+            <button class="icon-btn" title="الوضع الليلي"><i class="fa-solid fa-sun" id="themeIcon"></i></button>
+            <button class="icon-btn" title="المفضلة"><i class="fa-solid fa-heart"></i><span class="badge" id="wishCount">0</span></button>
+            <button class="icon-btn" title="سلة الحجز"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartCount">0</span></button>
+            <button class="icon-btn" title="الملف الشخصي"><i class="fa-solid fa-user"></i></button>
+            <button class="icon-btn" title="لوحة الإدارة"><i class="fa-solid fa-crown" style="color: var(--gold);"></i></button>
+        </div>
+    </nav>
+
+    <!-- 3D Header -->
+    <header class="hero-3d">
+        <canvas id="canvas3d"></canvas>
+        <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-sparkles"></i> المنصة الرسمية للتسوق الذكي</span>
+            <h2>جمعية الرياض التعاونية</h2>
+            <p style="color: #cbd5e1; font-size: 1rem;">أفضل الأجهزة والبضائع بأفضل الأسعار في بغداد</p>
+            <div class="hero-info-pills">
+                <div class="pill"><i class="fa-solid fa-location-dot"></i> بغداد - جسر ديالى</div>
+                <div class="pill"><i class="fa-solid fa-clock"></i> 9 ص - 12 ظهراً | 3 ع - 7 م</div>
+                <a href="https://wa.me/9647713672990" target="_blank" class="pill" style="border-color: var(--gold);">
+                    <i class="fa-brands fa-whatsapp"></i> 07713672990
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="filter-panel">
+            <div class="input-group">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-control" placeholder="ابحث عن منتج...">
+            </div>
+            <select class="form-control"><option>جميع الأقسام</option></select>
+            <select class="form-control"><option>جميع الماركات</option></select>
+            <select class="form-control"><option>الأحدث إضافة</option></select>
+        </div>
+    </main>
+        <!-- Products Grid Section -->
+        <div class="section-header" style="margin-top: 35px;">
+            <h3 class="section-title">المنتجات المتوفرة في المعرض</h3>
+            <span id="resultsCount" style="color: var(--text-muted); font-size: 0.9rem;">0 منتج</span>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <!-- Customer Reviews Section -->
+        <section style="margin-top: 50px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 18px; padding: 25px; box-shadow: var(--shadow);">
+            <div class="section-header" style="margin-top: 0;">
+                <h3 class="section-title">آراء وتقييمات الزبائن</h3>
+                <button class="btn btn-gold" onclick="openReviewModal()"><i class="fa-solid fa-pen"></i> أضف تقييمك</button>
+            </div>
+            <div id="reviewsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--navy); color: #cbd5e1; margin-top: 60px; padding: 45px 5% 25px; border-top: 2px solid var(--gold);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1320px; margin: 0 auto;">
+            <div>
+                <h3 style="color: var(--gold); margin-bottom: 12px;">جمعية الرياض التعاونية</h3>
+                <p>وجهتك الأولى للتسوق الآمن والذكي في بغداد. جودة عالية وأسعار تعاونية تنافسية.</p>
+                <div style="display: flex; gap: 12px; margin-top: 15px;">
+                    <a href="https://www.tiktok.com/@jamea656" target="_blank" class="icon-btn"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/read7_9" target="_blank" class="icon-btn"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/search/top?q=جمعية%20الرياض%20التعاونية" target="_blank" class="icon-btn"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://wa.me/9647713672990" target="_blank" class="icon-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="color: #fff; margin-bottom: 12px;">ساعات العمل</h4>
+                <p>الصباحي: 9:00 صباحاً - 12:00 ظهراً</p>
+                <p style="margin-top: 6px;">المسائي: 3:00 عصراً - 7:00 مساءً</p>
+            </div>
+            <div>
+                <h4 style="color: #fff; margin-bottom: 12px;">العنوان</h4>
+                <p>بغداد - جسر ديالى، بداية سوق الرياض.</p>
+                <p style="margin-top: 6px; color: var(--gold);">خدمة التوصيل متوفرة لكافة مناطق بغداد.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CSS Cards & Modals Extra -->
+    <style>
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .card-img-wrap { position: relative; height: 210px; background: #0f172a; overflow: hidden; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .stock-tag { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; background: rgba(16, 185, 129, 0.9); color: #fff; }
+        .stock-tag.out { background: rgba(239, 68, 68, 0.9); }
+        .wish-btn { position: absolute; top: 12px; left: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(10, 25, 47, 0.75); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .wish-btn.active { color: #ef4444; background: #fff; }
+        .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+        .card-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--gold); font-weight: 700; margin-bottom: 5px; }
+        .card-title { font-size: 1.08rem; font-weight: 800; margin-bottom: 6px; }
+        .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; flex: 1; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-color); }
+        .price { font-size: 1.15rem; font-weight: 900; color: var(--gold); }
+        .btn { padding: 9px 16px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-size: 0.9rem; }
+        .btn-gold { background: var(--gold); color: var(--navy); }
+        .btn-gold:hover { background: var(--gold-hover); }
+        .btn-navy { background: var(--navy); color: #fff; border: 1px solid var(--gold); }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-success { background: var(--success); color: #fff; }
+
+        /* Modals */
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(6, 13, 24, 0.8); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 15px; }
+        .modal-backdrop.open { display: flex; }
+        .modal-box { background: var(--bg-card); border: 1px solid var(--gold); border-radius: 18px; width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; padding: 24px; position: relative; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); }
+        .modal-box.wide { max-width: 1050px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 1px solid var(--border-color); }
+        .close-modal { background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; }
+    </style>
+
+    <!-- MODALS HTML STRUCTURE -->
+    <!-- Cart Modal -->
+    <div class="modal-backdrop" id="cartModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-cart-shopping" style="color:var(--gold)"></i> سلة الحجز والطلب</h3>
+                <button class="close-modal" onclick="closeModal('cartModal')">&times;</button>
+            </div>
+            <div id="cartItemsList" style="max-height:280px; overflow-y:auto; margin-bottom:15px;"></div>
+            <div id="cartSummary" style="border-top:1px solid var(--border-color); padding-top:12px; margin-bottom:15px;"></div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <input type="text" id="orderName" class="form-control" placeholder="اسم الزبون الكريم">
+                <input type="text" id="orderPhone" class="form-control" placeholder="رقم الهاتف (للتواصل)">
+                <input type="text" id="orderAddress" class="form-control" placeholder="العنوان بالتفصيل (منطقة، سكن)">
+                <select id="paymentMethod" class="form-control">
+                    <option value="نقدي عند الاستلام">الدفع نقدي عند الاستلام</option>
+                    <option value="ماستر كارد / زين كاش">الدفع الإلكتروني (ماستر كارد / زين كاش)</option>
+                </select>
+                <button class="btn btn-success" style="width:100%; padding:12px;" onclick="checkoutWhatsApp()"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر الواتساب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal-backdrop" id="wishlistModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-heart" style="color:#ef4444"></i> المنتجات المفضلة</h3>
+                <button class="close-modal" onclick="closeModal('wishlistModal')">&times;</button>
+            </div>
+            <div id="wishlistItemsList" style="max-height:350px; overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-backdrop" id="settingsModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-sliders" style="color:var(--gold)"></i> إعدادات الرفاهية والتخصيص</h3>
+                <button class="close-modal" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                    <label style="font-weight:700; display:block; margin-bottom:6px;">مظهر الواجهة</label>
+                    <button class="btn btn-navy" style="width:100%;" onclick="toggleTheme()">تبديل الوضع الليلي / النهاري</button>
+                </div>
+                <div>
+                    <label style="font-weight:700; display:block; margin-bottom:6px;">حجم الخط المريح للعين</label>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn btn-navy" style="flex:1;" onclick="setFontScale(0.92)">صغير</button>
+                        <button class="btn btn-gold" style="flex:1;" onclick="setFontScale(1)">قياسي</button>
+                        <button class="btn btn-navy" style="flex:1;" onclick="setFontScale(1.12)">كبير</button>
+                    </div>
+                </div>
+                <div>
+                    <label style="font-weight:700; display:block; margin-bottom:6px;">حركة الجزيئات ثلاثية الأبعاد (3D)</label>
+                    <button class="btn btn-navy" style="width:100%;" onclick="toggle3DEffect()">إيقاف / تشغيل خلفية الهيدر</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-backdrop" id="profileModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear" style="color:var(--gold)"></i> الملف الشخصي وإعدادات الحساب</h3>
+                <button class="close-modal" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:14px; text-align:center;">
+                <div style="position:relative; width:90px; height:90px; margin:0 auto;">
+                    <img id="profileAvatar" src="https://via.placeholder.com/90" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:2px solid var(--gold);">
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="updateAvatar(this)">
+                    <button class="btn btn-gold" style="position:absolute; bottom:0; right:0; width:28px; height:28px; border-radius:50%; padding:0; font-size:0.7rem;" onclick="document.getElementById('avatarUpload').click()"><i class="fa-solid fa-camera"></i></button>
+                </div>
+                <input type="text" id="profileName" class="form-control" placeholder="اسمك الكريم">
+                <input type="email" id="profileEmail" class="form-control" placeholder="البريد الإلكتروني">
+                <input type="text" id="profilePhone" class="form-control" placeholder="رقم الهاتف">
+                <button class="btn btn-gold" style="width:100%;" onclick="saveProfile()">حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal-backdrop" id="reviewModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-star" style="color:var(--gold)"></i> إضافة رأي أو تقييم</h3>
+                <button class="close-modal" onclick="closeModal('reviewModal')">&times;</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                <input type="text" id="reviewName" class="form-control" placeholder="اسمك الكريم">
+                <select id="reviewRating" class="form-control">
+                    <option value="5">⭐⭐⭐⭐⭐ (ممتاز جداً)</option>
+                    <option value="4">⭐⭐⭐⭐ (جيد جداً)</option>
+                    <option value="3">⭐⭐⭐ (مرضي)</option>
+                </select>
+                <textarea id="reviewText" class="form-control" placeholder="اكتب تقييمك أو رأيك بالخدمة والمنتجات..." rows="3"></textarea>
+                <button class="btn btn-gold" style="width:100%;" onclick="submitReview()">إرسال التقييم</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-backdrop" id="adminLoginModal">
+        <div class="modal-box" style="max-width:420px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shield-halved" style="color:var(--gold)"></i> تسجيل دخول الإدارة</h3>
+                <button class="close-modal" onclick="closeModal('adminLoginModal')">&times;</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+                <input type="email" id="adminEmailInput" class="form-control" placeholder="إيميل الأدمن">
+                <input type="password" id="adminPassInput" class="form-control" placeholder="كلمة السر السرية">
+                <button class="btn btn-gold" style="width:100%; padding:11px;" onclick="verifyAdminLogin()">دخول لوحة التحكم</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal-backdrop" id="adminPanelModal">
+        <div class="modal-box wide">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-crown" style="color:var(--gold)"></i> لوحة الإدارة الشاملة (مبيعات، مخزون، أدمنية)</h3>
+                <button class="close-modal" onclick="closeModal('adminPanelModal')">&times;</button>
+            </div>
+            <div style="display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;">
+                <button class="btn btn-gold" onclick="switchAdminTab('productsTab')"><i class="fa-solid fa-box"></i> إدارة المنتجات والمخزون</button>
+                <button class="btn btn-navy" onclick="switchAdminTab('categoriesTab')"><i class="fa-solid fa-tags"></i> إدارة الأقسام</button>
+                <button class="btn btn-navy" onclick="switchAdminTab('salesTab')"><i class="fa-solid fa-chart-line"></i> سجل المبيعات والطلبات</button>
+                <button class="btn btn-navy" onclick="switchAdminTab('adminsTab')"><i class="fa-solid fa-user-shield"></i> صلاحيات وإضافة أدمن</button>
+            </div>
+
+            <!-- Tab 1: Products -->
+            <div id="productsTab" class="admin-tab">
+                <div style="background:var(--bg-primary); padding:16px; border-radius:12px; margin-bottom:20px; border:1px solid var(--border-color);">
+                    <h4 style="margin-bottom:12px; color:var(--gold);">إضافة منتج جديد للمعرض</h4>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:12px;">
+                        <input type="text" id="newProdName" class="form-control" placeholder="اسم المنتج">
+                        <input type="text" id="newProdBrand" class="form-control" placeholder="الماركة (مثال: سامسونج)">
+                        <select id="newProdCategory" class="form-control"><option value="">اختر القسم</option></select>
+                        <input type="number" id="newProdPrice" class="form-control" placeholder="السعر (دينار عراقي)">
+                        <input type="number" id="newProdStock" class="form-control" placeholder="العدد المتوفر بالمخزن" value="10">
+                        <input type="file" id="newProdImg" class="form-control" accept="image/*">
+                    </div>
+                    <textarea id="newProdDesc" class="form-control" placeholder="وصف تفصيلي للمنتج..." rows="2" style="margin-bottom:12px;"></textarea>
+                    <button class="btn btn-gold" onclick="addNewProduct()"><i class="fa-solid fa-plus"></i> حفظ وإضافة المنتج</button>
+                </div>
+                <h4 style="margin-bottom:10px;">قائمة المنتجات الحالية</h4>
+                <div id="adminProductsList" style="max-height:280px; overflow-y:auto;"></div>
+            </div>
+
+            <!-- Tab 2: Categories -->
+            <div id="categoriesTab" class="admin-tab" style="display:none;">
+                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                    <input type="text" id="newCatName" class="form-control" placeholder="اسم القسم الجديد">
+                    <button class="btn btn-gold" onclick="addNewCategory()">إضافة قسم</button>
+                </div>
+                <div id="adminCategoriesList" style="max-height:300px; overflow-y:auto;"></div>
+            </div>
+
+            <!-- Tab 3: Sales -->
+            <div id="salesTab" class="admin-tab" style="display:none;">
+                <h4>سجل المبيعات والطلبات</h4>
+                <div id="adminSalesList" style="max-height:320px; overflow-y:auto; margin-top:10px;"></div>
+            </div>
+
+            <!-- Tab 4: Admins Management -->
+            <div id="adminsTab" class="admin-tab" style="display:none;">
+                <div style="background:var(--bg-primary); padding:16px; border-radius:12px; margin-bottom:20px; border:1px solid var(--border-color);">
+                    <h4 style="margin-bottom:12px; color:var(--gold);">إضافة مشرف / أدمن جديد للنظام</h4>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+                        <input type="email" id="newAdminEmail" class="form-control" placeholder="إيميل الأدمن الجديد">
+                        <input type="password" id="newAdminPass" class="form-control" placeholder="كلمة السر الجديدة">
+                    </div>
+                    <button class="btn btn-gold" onclick="addNewAdminUser()">منح صلاحية أدمن</button>
+                </div>
+                <h4>قائمة المشرفين المسجلين</h4>
+                <div id="adminUsersList" style="max-height:220px; overflow-y:auto;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // --- Configuration & Credentials ---
+        const ADMIN_OWNER_EMAIL = "zainnabell019@gmail.com";
+        const ADMIN_OWNER_PASS = "zain_gamer17";
+        const BOT_TOKEN = "9096221471:AAFRVd-S2HQGLc4R3XsUaWNv7QYffIptRXo";
+        const CHAT_ID = "1076116553";
+        const WHATSAPP_NUM = "9647713672990";
+
+        // --- Initial State ---
+        let db = {
+            categories: JSON.parse(localStorage.getItem('jamea_cats')) || ["إلكترونيات وموبايلات", "أجهزة منزلية ومكنسات", "مواد إنشائية وأدوات", "طاقة شمسية وإنارة"],
+            products: JSON.parse(localStorage.getItem('jamea_prods')) || [],
+            cart: JSON.parse(localStorage.getItem('jamea_cart')) || [],
+            wishlist: JSON.parse(localStorage.getItem('jamea_wish')) || [],
+            reviews: JSON.parse(localStorage.getItem('jamea_revs')) || [
+                { name: "علي الخفاجي", rating: 5, text: "جمعية مباركة وتعاملهم ممتاز والأسعار كلش تنافسية وجسر ديالى منور بيهم.", date: "2026-11-10" }
+            ],
+            admins: JSON.parse(localStorage.getItem('jamea_admins')) || [ { email: "zainnabell019@gmail.com" } ],
+            sales: JSON.parse(localStorage.getItem('jamea_sales')) || [],
+            profile: JSON.parse(localStorage.getItem('jamea_prof')) || { name: "زين العابدين", email: "zainnabell019@gmail.com", phone: "07713672990", avatar: "https://via.placeholder.com/90" }
+        };
+
+        // --- Telegram Bot Notification Helper ---
+        function sendTelegramNotification(text) {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
+            fetch(url).catch(e => console.log('Telegram notice sent error', e));
+        }
+
+        // --- Save to LocalStorage ---
+        function saveData() {
+            localStorage.setItem('jamea_cats', JSON.stringify(db.categories));
+            localStorage.setItem('jamea_prods', JSON.stringify(db.products));
+            localStorage.setItem('jamea_cart', JSON.stringify(db.cart));
+            localStorage.setItem('jamea_wish', JSON.stringify(db.wishlist));
+            localStorage.setItem('jamea_revs', JSON.stringify(db.reviews));
+            localStorage.setItem('jamea_admins', JSON.stringify(db.admins));
+            localStorage.setItem('jamea_sales', JSON.stringify(db.sales));
+            localStorage.setItem('jamea_prof', JSON.stringify(db.profile));
+            updateBadges();
+        }
+
+        // --- Init App ---
+        window.onload = function() {
+            renderCategoriesDropdowns();
+            renderProducts();
+            renderReviews();
+            updateBadges();
+            loadProfileData();
+            init3DCanvas();
+
+            // Link Nav Buttons safely
+            const navBtns = document.querySelectorAll('.navbar .icon-btn');
+            if(navBtns.length >= 5) {
+                navBtns[0].onclick = toggleTheme;
+                navBtns[1].onclick = openWishlistModal;
+                navBtns[2].onclick = openCartModal;
+                navBtns[3].onclick = openProfileModal;
+                navBtns[4].onclick = openAdminGate;
+            }
+        };
+
+        function updateBadges() {
+            const cartBadge = document.getElementById('cartCount');
+            const wishBadge = document.getElementById('wishCount');
+            if(cartBadge) cartBadge.innerText = db.cart.reduce((sum, item) => sum + item.qty, 0);
+            if(wishBadge) wishBadge.innerText = db.wishlist.length;
+        }
+
+        // --- Theme & Luxury Settings ---
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            const themeIcon = document.getElementById('themeIcon');
+            if(themeIcon) themeIcon.className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        function setFontScale(scale) {
+            document.documentElement.style.setProperty('--font-scale', scale);
+        }
+
+        let is3DActive = true;
+        function toggle3DEffect() {
+            is3DActive = !is3DActive;
+            const c3d = document.getElementById('canvas3d');
+            if(c3d) c3d.style.display = is3DActive ? 'block' : 'none';
+        }
+
+        // --- 3D Particle Canvas Background ---
+        function init3DCanvas() {
+            const canvas = document.getElementById('canvas3d');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = canvas.parentElement.offsetWidth;
+            let height = canvas.height = canvas.parentElement.offsetHeight;
+
+            window.onresize = () => {
+                if(canvas.parentElement) {
+                    width = canvas.width = canvas.parentElement.offsetWidth;
+                    height = canvas.height = canvas.parentElement.offsetHeight;
+                }
+            };
+
+            const particles = Array.from({length: 45}, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 1.2,
+                vy: (Math.random() - 0.5) * 1.2,
+                radius: Math.random() * 2.5 + 1
+            }));
+
+            function animate() {
+                if(!is3DActive) return requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.45)';
+                ctx.strokeStyle = 'rgba(212, 175, 55, 0.12)';
+
+                particles.forEach((p, index) => {
+                    p.x += p.vx; p.y += p.vy;
+                    if(p.x < 0 || p.x > width) p.vx *= -1;
+                    if(p.y < 0 || p.y > height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for(let j = index + 1; j < particles.length; j++) {
+                        let p2 = particles[j];
+                        let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if(dist < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // --- Render Products & Filters ---
+        function renderCategoriesDropdowns() {
+            const catFilter = document.querySelector('.filter-panel select:nth-child(2)');
+            const brandFilter = document.querySelector('.filter-panel select:nth-child(3)');
+            const newProdCat = document.getElementById('newProdCategory');
+            
+            let htmlOptions = '<option value="all">جميع الأقسام</option>';
+            let newCatOptions = '<option value="">اختر القسم</option>';
+
+            db.categories.forEach(cat => {
+                htmlOptions += `<option value="${cat}">${cat}</option>`;
+                newCatOptions += `<option value="${cat}">${cat}</option>`;
+            });
+            if(catFilter) catFilter.innerHTML = htmlOptions;
+            if(newProdCat) newProdCat.innerHTML = newCatOptions;
+
+            const brands = [...new Set(db.products.map(p => p.brand))];
+            let brandOpts = '<option value="all">جميع الماركات</option>';
+            brands.forEach(b => brandOpts += `<option value="${b}">${b}</option>`);
+            if(brandFilter) brandFilter.innerHTML = brandOpts;
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const searchInput = document.querySelector('.filter-panel input');
+            const catFilter = document.querySelector('.filter-panel select:nth-child(2)');
+            const brandFilter = document.querySelector('.filter-panel select:nth-child(3)');
+            const sortFilter = document.querySelector('.filter-panel select:nth-child(4)');
+
+            const search = searchInput ? searchInput.value.toLowerCase() : '';
+            const cat = catFilter ? catFilter.value : 'all';
+            const brand = brandFilter ? brandFilter.value : 'all';
+            const sort = sortFilter ? sortFilter.value : 'newest';
+
+            let filtered = db.products.filter(p => {
+                let matchSearch = p.name.toLowerCase().includes(search) || p.brand.toLowerCase().includes(search);
+                let matchCat = cat === 'all' || p.category === cat;
+                let matchBrand = brand === 'all' || p.brand === brand;
+                return matchSearch && matchCat && matchBrand;
+            });
+
+            if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+            if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+            if(sort === 'newest') filtered.reverse();
+
+            const resCount = document.getElementById('resultsCount');
+            if(resCount) resCount.innerText = `${filtered.length} منتج`;
+
+            if(!grid) return;
+            if(filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:45px; color:var(--text-muted);">لا توجد منتجات مطابقة للبحث حالياً في المعرض.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                let isWish = db.wishlist.some(item => item.id === p.id);
+                return `
+                    <div class="product-card">
+                        <div class="card-img-wrap">
+                            <img src="${p.img || 'https://via.placeholder.com/300'}" alt="${p.name}">
+                            <span class="stock-tag ${p.stock > 0 ? '' : 'out'}">${p.stock > 0 ? 'متوفر' : 'نفذت'}</span>
+                            <button class="wish-btn ${isWish ? 'active' : ''}" onclick="toggleWishlist(${p.id})"><i class="fa-solid fa-heart"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta"><span>${p.brand}</span><span>${p.category}</span></div>
+                            <h4 class="card-title">${p.name}</h4>
+                            <p class="card-desc">${p.desc || 'لا يوجد وصف إضافي'}</p>
+                            <div class="card-footer">
+                                <span class="price">${Number(p.price).toLocaleString()} د.ع</span>
+                                <button class="btn btn-gold" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> حجز</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.addEventListener('input', e => { if(e.target.closest('.filter-panel')) renderProducts(); });
+        document.addEventListener('change', e => { if(e.target.closest('.filter-panel')) renderProducts(); });
+
+        // --- Cart & Wishlist ---
+        function addToCart(id) {
+            const prod = db.products.find(p => p.id === id);
+            if(!prod || prod.stock <= 0) return alert('المنتج غير متوفر حالياً بالمخزن.');
+            let exist = db.cart.find(item => item.id === id);
+            if(exist) {
+                if(exist.qty < prod.stock) exist.qty++;
+                else alert('وصلت للحد الأقصى المتوفر بالمخزن.');
+            } else {
+                db.cart.push({ ...prod, qty: 1 });
+            }
+            saveData();
+            alert('تمت إضافة المنتج إلى سلة الحجز بنجاح!');
+        }
+
+        function toggleWishlist(id) {
+            let idx = db.wishlist.findIndex(item => item.id === id);
+            if(idx > -1) {
+                db.wishlist.splice(idx, 1);
+            } else {
+                let prod = db.products.find(p => p.id === id);
+                if(prod) db.wishlist.push(prod);
+            }
+            saveData();
+            renderProducts();
+        }
+
+        function openCartModal() {
+            const list = document.getElementById('cartItemsList');
+            const summary = document.getElementById('cartSummary');
+            if(db.cart.length === 0) {
+                list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:20px;">سلة الحجز فارغة حالياً.</p>`;
+                summary.innerHTML = '';
+            } else {
+                let total = 0;
+                list.innerHTML = db.cart.map(item => {
+                    total += item.price * item.qty;
+                    return `
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color);">
+                            <div><strong>${item.name}</strong><br><small style="color:var(--gold);">${item.price} د.ع × ${item.qty}</small></div>
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <button class="btn btn-navy" style="padding:3px 8px;" onclick="changeCartQty(${item.id}, 1)">+</button>
+                                <span>${item.qty}</span>
+                                <button class="btn btn-danger" style="padding:3px 8px;" onclick="changeCartQty(${item.id}, -1)">-</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                summary.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:900; font-size:1.1rem;"><span>الإجمالي الكلي:</span><span style="color:var(--gold);">${total.toLocaleString()} د.ع</span></div>`;
+            }
+            document.getElementById('orderName').value = db.profile.name || '';
+            document.getElementById('orderPhone').value = db.profile.phone || '';
+            openModal('cartModal');
+        }
+
+        function changeCartQty(id, delta) {
+            let item = db.cart.find(i => i.id === id);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) db.cart = db.cart.filter(i => i.id !== id);
+                saveData();
+                openCartModal();
+            }
+        }
+
+        function openWishlistModal() {
+            const list = document.getElementById('wishlistItemsList');
+            if(db.wishlist.length === 0) {
+                list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:20px;">لا توجد منتجات في المفضلة.</p>`;
+            } else {
+                list.innerHTML = db.wishlist.map(w => `
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color);">
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <img src="${w.img}" style="width:45px; height:45px; border-radius:8px; object-fit:cover;">
+                            <div><strong>${w.name}</strong><br><small style="color:var(--gold);">${w.price} د.ع</small></div>
+                        </div>
+                        <button class="btn btn-gold" style="padding:6px 12px;" onclick="addToCart(${w.id}); toggleWishlist(${w.id}); closeModal('wishlistModal');">حجز</button>
+                    </div>
+                `).join('');
+            }
+            openModal('wishlistModal');
+        }
+
+        function checkoutWhatsApp() {
+            if(db.cart.length === 0) return alert('السلة فارغة!');
+            const name = document.getElementById('orderName').value.trim();
+            const phone = document.getElementById('orderPhone').value.trim();
+            const address = document.getElementById('orderAddress').value.trim();
+            const pay = document.getElementById('paymentMethod').value;
+
+            if(!name || !phone || !address) return alert('يرجى إكمال بيانات الزبون (الاسم، الهاتف، العنوان).');
+
+            let itemsStr = db.cart.map(i => `• ${i.name} (عدد: ${i.qty}) - ${i.price * i.qty} د.ع`).join('\n');
+            let total = db.cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+            let msg = `🛒 *طلب جديد عبر موقع جمعية الرياض التعاونية*\n\n` +
+                      `👤 *الاسم:* ${name}\n` +
+                      `📞 *الهاتف:* ${phone}\n` +
+                      `📍 *العنوان:* ${address}\n` +
+                      `💳 *طريقة الدفع:* ${pay}\n\n` +
+                      `📦 *المنتجات المطلوبة:*\n${itemsStr}\n\n` +
+                      `💰 *المجموع الكلي:* ${total.toLocaleString()} د.ع`;
+
+            db.sales.unshift({ date: new Date().toLocaleString(), name, phone, address, total, items: [...db.cart] });
+            sendTelegramNotification(`🚨 طلب جديد في جمعية الرياض!\nالزبون: ${name}\nالمبلغ: ${total} د.ع\nالهاتف: ${phone}`);
+
+            db.cart = [];
+            saveData();
+            closeModal('cartModal');
+
+            window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+    <script>
+        // --- Profile & Reviews ---
+        function openProfileModal() {
+            document.getElementById('profileName').value = db.profile.name || '';
+            document.getElementById('profileEmail').value = db.profile.email || '';
+            document.getElementById('profilePhone').value = db.profile.phone || '';
+            document.getElementById('profileAvatar').src = db.profile.avatar || 'https://via.placeholder.com/90';
+            openModal('profileModal');
+        }
+
+        function loadProfileData() {
+            if(db.profile.avatar) {
+                const av = document.getElementById('profileAvatar');
+                if(av) av.src = db.profile.avatar;
+            }
+        }
+
+        function updateAvatar(input) {
+            if(input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = e => {
+                    let img = new Image();
+                    img.onload = () => {
+                        let canvas = document.createElement('canvas');
+                        let ctx = canvas.getContext('2d');
+                        canvas.width = 150; canvas.height = 150;
+                        ctx.drawImage(img, 0, 0, 150, 150);
+                        db.profile.avatar = canvas.toDataURL('image/jpeg', 0.8);
+                        const av = document.getElementById('profileAvatar');
+                        if(av) av.src = db.profile.avatar;
+                        saveData();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function saveProfile() {
+            db.profile.name = document.getElementById('profileName').value;
+            db.profile.email = document.getElementById('profileEmail').value;
+            db.profile.phone = document.getElementById('profilePhone').value;
+            saveData();
+            closeModal('profileModal');
+            alert('تم حفظ الملف الشخصي بنجاح!');
+        }
+
+        function openReviewModal() {
+            const revName = document.getElementById('reviewName');
+            if(revName) revName.value = db.profile.name || '';
+            openModal('reviewModal');
+        }
+
+        function submitReview() {
+            const name = document.getElementById('reviewName').value.trim();
+            const rating = document.getElementById('reviewRating').value;
+            const text = document.getElementById('reviewText').value.trim();
+            if(!name || !text) return alert('يرجى ملء الاسم ونص التقييم.');
+
+            db.reviews.unshift({ name, rating, text, date: new Date().toLocaleDateString() });
+            sendTelegramNotification(`⭐ تقييم جديد من ${name} (${rating} نجوم): ${text}`);
+            saveData();
+            closeModal('reviewModal');
+            renderReviews();
+            alert('شكراً لك! تم إضافة تقييمك بنجاح.');
+        }
+
+        function renderReviews() {
+            const list = document.getElementById('reviewsList');
+            if(!list) return;
+            list.innerHTML = db.reviews.map(r => `
+                <div style="background:var(--bg-primary); padding:14px; border-radius:12px; border:1px solid var(--border-color);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                        <strong>${r.name}</strong>
+                        <span style="color:var(--gold);">${'⭐'.repeat(r.rating)}</span>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-muted);">${r.text}</p>
+                    <small style="font-size:0.75rem; color:var(--text-muted); display:block; margin-top:8px;">${r.date}</small>
+                </div>
+            `).join('');
+        }
+
+        // --- Admin Panel Management ---
+        function openAdminGate() {
+            openModal('adminLoginModal');
+        }
+
+        function verifyAdminLogin() {
+            const email = document.getElementById('adminEmailInput').value.trim();
+            const pass = document.getElementById('adminPassInput').value.trim();
+
+            let isAdminFound = (email === ADMIN_OWNER_EMAIL && pass === ADMIN_OWNER_PASS) ||
+                               db.admins.some(a => a.email === email && a.pass === pass);
+
+            if(isAdminFound) {
+                closeModal('adminLoginModal');
+                openModal('adminPanelModal');
+                renderAdminProducts();
+                renderAdminCategories();
+                renderAdminSales();
+                renderAdminUsers();
+            } else {
+                alert('خطأ في إيميل أو كلمة سر الأدمن!');
+            }
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.style.display = 'none');
+            const target = document.getElementById(tabId);
+            if(target) target.style.display = 'block';
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('newProdName').value.trim();
+            const brand = document.getElementById('newProdBrand').value.trim();
+            const category = document.getElementById('newProdCategory').value;
+            const price = Number(document.getElementById('newProdPrice').value);
+            const stock = Number(document.getElementById('newProdStock').value);
+            const desc = document.getElementById('newProdDesc').value.trim();
+            const fileInput = document.getElementById('newProdImg');
+
+            if(!name || !brand || !category || !price) return alert('يرجى ملء الحقول الأساسية للمنتج.');
+
+            if(fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = e => {
+                    let img = new Image();
+                    img.onload = () => {
+                        let canvas = document.createElement('canvas');
+                        let ctx = canvas.getContext('2d');
+                        let width = 400; let height = (img.height * width) / img.width;
+                        canvas.width = width; canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        let compressedImg = canvas.toDataURL('image/jpeg', 0.75);
+                        saveNewProductObj(name, brand, category, price, stock, desc, compressedImg);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveNewProductObj(name, brand, category, price, stock, desc, 'https://via.placeholder.com/300');
+            }
+        }
+
+        function saveNewProductObj(name, brand, category, price, stock, desc, img) {
+            db.products.push({ id: Date.now(), name, brand, category, price, stock, desc, img });
+            saveData();
+            renderProducts();
+            renderAdminProducts();
+            renderCategoriesDropdowns();
+            alert('تم إضافة المنتج بنجاح وتحديث المتجر!');
+            document.getElementById('newProdName').value = '';
+            document.getElementById('newProdBrand').value = '';
+            document.getElementById('newProdPrice').value = '';
+            document.getElementById('newProdDesc').value = '';
+        }
+
+        function renderAdminProducts() {
+            const list = document.getElementById('adminProductsList');
+            if(!list) return;
+            if(db.products.length === 0) {
+                list.innerHTML = `<p style="color:var(--text-muted)">لا توجد منتجات مضافة بعد.</p>`;
+                return;
+            }
+            list.innerHTML = db.products.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid var(--border-color); background:var(--bg-primary); margin-bottom:8px; border-radius:8px;">
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <img src="${p.img}" style="width:40px; height:40px; object-fit:cover; border-radius:6px;">
+                        <div><strong>${p.name}</strong><br><small style="color:var(--gold);">${p.price} د.ع | مخزون: ${p.stock}</small></div>
+                    </div>
+                    <button class="btn btn-danger" style="padding:5px 10px;" onclick="deleteProduct(${p.id})">حذف</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteProduct(id) {
+            db.products = db.products.filter(p => p.id !== id);
+            saveData();
+            renderProducts();
+            renderAdminProducts();
+        }
+
+        function addNewCategory() {
+            const catName = document.getElementById('newCatName').value.trim();
+            if(!catName) return alert('أدخل اسم القسم.');
+            if(db.categories.includes(catName)) return alert('القسم موجود مسبقاً.');
+            db.categories.push(catName);
+            saveData();
+            renderCategoriesDropdowns();
+            renderAdminCategories();
+            document.getElementById('newCatName').value = '';
+            alert('تم إضافة القسم بنجاح!');
+        }
+
+        function renderAdminCategories() {
+            const list = document.getElementById('adminCategoriesList');
+            if(!list) return;
+            list.innerHTML = db.categories.map((c, idx) => `
+                <div style="display:flex; justify-content:space-between; padding:10px; background:var(--bg-primary); margin-bottom:6px; border-radius:8px;">
+                    <span>${c}</span>
+                    <button class="btn btn-danger" style="padding:4px 8px;" onclick="deleteCategory(${idx})">حذف</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteCategory(idx) {
+            db.categories.splice(idx, 1);
+            saveData();
+            renderCategoriesDropdowns();
+            renderAdminCategories();
+        }
+
+        function renderAdminSales() {
+            const list = document.getElementById('adminSalesList');
+            if(!list) return;
+            if(db.sales.length === 0) {
+                list.innerHTML = `<p style="color:var(--text-muted)">لا توجد مبيعات مسجلة حتى الآن.</p>`;
+                return;
+            }
+            list.innerHTML = db.sales.map(s => `
+                <div style="background:var(--bg-primary); padding:12px; border-radius:10px; margin-bottom:10px; border:1px solid var(--border-color);">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--gold);">
+                        <span>الزبون: ${s.name} (${s.phone})</span>
+                        <span>${s.total.toLocaleString()} د.ع</span>
+                    </div>
+                    <p style="font-size:0.85rem; margin:4px 0;">العنوان: ${s.address}</p>
+                    <small style="color:var(--text-muted);">${s.date}</small>
+                </div>
+            `).join('');
+        }
+
+        function addNewAdminUser() {
+            const email = document.getElementById('newAdminEmail').value.trim();
+            const pass = document.getElementById('newAdminPass').value.trim();
+            if(!email || !pass) return alert('يرجى ادخال البريد وكلمة السر.');
+            db.admins.push({ email, pass });
+            saveData();
+            renderAdminUsers();
+            alert('تم منح صلاحية الأدمن بنجاح!');
+            document.getElementById('newAdminEmail').value = '';
+            document.getElementById('newAdminPass').value = '';
+        }
+
+        function renderAdminUsers() {
+            const list = document.getElementById('adminUsersList');
+            if(!list) return;
+            list.innerHTML = db.admins.map(a => `
+                <div style="padding:8px; background:var(--bg-primary); margin-bottom:6px; border-radius:6px; display:flex; justify-content:space-between;">
+                    <span>${a.email}</span>
+                    <span style="color:var(--gold); font-size:0.85rem;">أدمن معتمد</span>
+                </div>
+            `).join('');
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('open'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    </script>
+</body>
+</html>
